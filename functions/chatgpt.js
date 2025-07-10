@@ -5,10 +5,13 @@ exports.handler = async function(event, context) {
 
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+  const prompt = `Prove me wrong: ${message}. Give me arguments that contradict this statement.`;
+
+
   try {
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: message }],
+      messages: [{ role: "user", content: prompt }],
       max_tokens: 150,
       temperature: 0.7
     });
