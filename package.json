@@ -1,0 +1,13 @@
+{
+  "name": "provemewrong",
+  "version": "1.0.0",
+  "description": "ChatGPT Netlify Function Demo",
+  "main": "functions/chatgpt.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "netlify dev"
+  },
+  "dependencies": {
+    "openai": "^4.0.0"
+  }
+}
