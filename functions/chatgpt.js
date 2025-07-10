@@ -3,6 +3,8 @@ const { Configuration, OpenAIApi } = require('openai');
 exports.handler = async function(event, context) {
   const { message } = JSON.parse(event.body);
 
+  console.log("User message:", message);  // Diagnostic
+
   const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY
   });
@@ -16,28 +18,16 @@ exports.handler = async function(event, context) {
       temperature: 0.7
     });
 
-    // Debug: log the full response
-    console.log('OpenAI response:', JSON.stringify(completion.data, null, 2));
+    console.log("OpenAI response:", completion.data);  // Diagnostic
 
-    let reply = "";
-    if (
-      completion &&
-      completion.data &&
-      completion.data.choices &&
-      completion.data.choices[0] &&
-      completion.data.choices[0].message &&
-      completion.data.choices[0].message.content
-    ) {
-      reply = completion.data.choices[0].message.content.trim();
-    } else {
-      reply = "No valid reply from OpenAI.";
-    }
+    const reply = completion.data.choices[0].message.content.trim();
+
     return {
       statusCode: 200,
       body: JSON.stringify({ reply })
     };
   } catch (error) {
-    console.error('OpenAI error:', error.response ? error.response.data : error.message);
+    console.error("Error:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ reply: "Error connecting to OpenAI" })
