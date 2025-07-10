@@ -31,7 +31,7 @@
       chatbox.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
       userInput.value = ''; 
 
-      const response = await fetch('/.netlify/functions/chatgpt.js', {
+      const response = await fetch('/.netlify/functions/chatgpt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message })
