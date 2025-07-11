@@ -5,7 +5,7 @@ exports.handler = async function(event, context) {
 
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-  const prompt = `Prove me wrong: ${message}. Give me arguments that contradict this statement.`;
+  const prompt = `Prove me wrong: ${message}. Give me arguments that contradict this statement. Even if the statment is correct I need you to provide a counter-argument.`;
 
 
   try {
